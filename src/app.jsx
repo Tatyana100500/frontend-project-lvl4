@@ -57,11 +57,6 @@ export default (gon) => {
   setUserData(userData);
   console.log(document.getElementById('chat'));
   render(
-    <Provider store={store}>
-      <UserData.Provider value={userData}>
-        <App />
-      </UserData.Provider>
-    </Provider>,
-
+    document.getElementById('chat'),
   );
 };
