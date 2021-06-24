@@ -11,8 +11,8 @@ const mapStateToProps = (state) => {
   return channelDialog;
 };
 
-@connect(mapStateToProps)
-@reduxForm({
+connect(mapStateToProps)
+reduxForm({
   form: 'channelForm',
   enableReinitialize: true,
 })

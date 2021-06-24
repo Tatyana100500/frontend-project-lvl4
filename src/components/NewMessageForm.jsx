@@ -12,8 +12,8 @@ const mapStateToProps = state => ({
   currentChannelId: getCurrentChannelId(state),
 });
 
-@connect(mapStateToProps)
-@reduxForm({
+connect(mapStateToProps)
+reduxForm({
   form: 'newMessage',
 })
 class NewMessageForm extends React.Component {

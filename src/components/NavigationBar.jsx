@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
   currentChannel: getCurrentChannel(state),
 });
 
-@connect(mapStateToProps)
+connect(mapStateToProps)
 class NavigationBar extends React.Component {
   render() {
     const { currentChannel: { name } } = this.props;
