@@ -57,13 +57,11 @@ export default (gon) => {
   setUserData(userData);
   console.log(document);
   render(
-    <div>
-    <Provider store={store}>
+    (<Provider store={store}>
       <UserData.Provider value={userData}>
         <App />
       </UserData.Provider>
-    </Provider>
-    </div>,
+    </Provider>),
     document.getElementById('#chat')
   );
 };
