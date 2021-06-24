@@ -15,8 +15,9 @@ import {
 } from './actions';
 
 export default (gon) => {
+  console.log(gon);
   const { channels, currentChannelId, messages } = gon;
-
+  console.log(channels, currentChannelId, messages);
   const initialState = {
     channels: {
       ...getStateFromData(channels),

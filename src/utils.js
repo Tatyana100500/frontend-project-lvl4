@@ -17,6 +17,7 @@ export const setUserData = (userData) => {
 };
 
 export const getStateFromData = (data) => {
+  console.log(data);
   const iteratee = item => item.id;
   return {
     byId: _keyBy(data, iteratee),
