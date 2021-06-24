@@ -21,6 +21,6 @@ export const getStateFromData = (data) => {
   const iteratee = item => item.id;
   return {
     byId: _keyBy(data, iteratee),
-    allIds: data.map(iteratee),
+    //allIds: data.map(iteratee),
   };
 };
