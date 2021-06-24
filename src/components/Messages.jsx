@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
   messages: getMessagesFromChannel(state),
 });
 
-@connect(mapStateToProps)
+connect(mapStateToProps)
 class Messages extends React.Component {
   constructor(props) {
     super(props);
