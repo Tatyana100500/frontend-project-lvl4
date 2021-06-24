@@ -1,10 +1,4 @@
 import getApp from '..';
 
-const port = process.env.PORT || 5000;
-const address = '0.0.0.0';
-
-getApp({ port }).then((app) => {
-  app.listen(port, address, () => {
-    console.log(`Server has been started on ${port}`);
-  });
-});
+const port = process.env.PORT || 4000;
+getApp().listen(port, () => console.log(`port: ${port}`));

@@ -16,7 +16,7 @@ export default (router, io) => {
   };
 
   const state = { ...defaultState };
-
+  console.log(state);
   const apiRouter = new Router();
   apiRouter
     .get('/channels', (ctx) => {
@@ -104,6 +104,7 @@ export default (router, io) => {
 
   return router
     .get('root', '/', (ctx) => {
+      console.log(ctx);
       ctx.render('index', { gon: state });
     })
     .use('/api/v1', apiRouter.routes(), apiRouter.allowedMethods());
