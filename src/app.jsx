@@ -62,6 +62,6 @@ export default (gon) => {
         <App />
       </UserData.Provider>
     </Provider>,
-    document.getElementById('chat'),
+    document.getElementById('#chat')
   );
 };
