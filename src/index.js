@@ -8,5 +8,5 @@ var gon = require('gon');
 if (process.env.NODE_ENV !== 'production') {
   localStorage.debug = 'chat:*';
 }
-console.log(app());
+//console.log(app());
 app(gon);
