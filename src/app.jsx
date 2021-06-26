@@ -56,7 +56,7 @@ export default (gon) => {
   const userData = getUserData();
   setUserData(userData);
   console.log(document);
-  return render(
+  return (
    <Provider store={store}>
       <UserData.Provider value={userData}>
         <App />
