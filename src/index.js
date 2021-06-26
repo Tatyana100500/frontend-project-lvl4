@@ -5,8 +5,8 @@ import '../assets/application.css';
 
 import app from './app';
 var gon = require('gon');
-if (process.env.NODE_ENV !== 'production') {
-  localStorage.debug = 'chat:*';
-}
+//if (process.env.NODE_ENV !== 'production') {
+//  localStorage.debug = 'chat:*';
+//}
 console.log(gon);
 app(gon);
