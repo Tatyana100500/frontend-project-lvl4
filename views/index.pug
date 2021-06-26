@@ -3,7 +3,8 @@ html(lang="en")
   head
     title= Title
     script
-      - var gon = !{JSON.stringify(gon)};
+      var gon = !{JSON.stringify(gon)};
+      console.log(gon);
   body
     div(id='chat')
     script(src='/assets/main.js')
