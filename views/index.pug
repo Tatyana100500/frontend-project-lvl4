@@ -2,10 +2,8 @@ doctype html
 html(lang="en")
   head
     title= Title
-    script
-      var gon = !{JSON.stringify(gon)};
-      console.log(gon);
+    - var gon = !{JSON.stringify(gon)};
   body
-    div(id='chat')
+    div#chat
     script(src='/assets/main.js')
     script(src='/assets/faker.js')
