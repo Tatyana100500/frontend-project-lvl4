@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/corsicanec82/frontend-project-lvl4.git"
+    "url": "git+https://github.com/Tatyana100500/frontend-project-lvl4.git"
   },
   "keywords": [
     "slack",
@@ -23,9 +23,9 @@
   ],
   "author": "Chernishova Tatyana",
   "bugs": {
-    "url": "https://github.com/corsicanec82/frontend-project-lvl4/issues"
+    "url": "https://github.com/Tatyana100500/frontend-project-lvl4/issues"
   },
-  "homepage": "https://github.com/corsicanec82/frontend-project-lvl4#readme",
+  "homepage": "https://github.com/Tatyana100500/frontend-project-lvl4#readme",
   "dependencies": {
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
