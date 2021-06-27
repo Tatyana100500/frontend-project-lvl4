@@ -1,4 +1,4 @@
-/*import 'core-js/stable';
+import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import '../assets/applications.scss';
 import i18nInit from './i18nInit';
@@ -6,10 +6,11 @@ import renderApp from './init';
 
 i18nInit().then(() => {
 console.log(renderApp(window.gon));
-renderApp(window.gon)});*/
+renderApp(window.gon)})
+.catch((e) => console.log(e));
 // @ts-check
 
-import Pug from 'pug';
+/*import Pug from 'pug';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import fastify from 'fastify';
@@ -24,7 +25,7 @@ import addRoutes from './routes.js';
 const { Unauthorized } = HttpErrors;
 
 // eslint-disable-next-line no-underscore-dangle
-const __filename = fileURLToPath(import.meta.url);
+const __filename = fileURLToPath();
 // eslint-disable-next-line no-underscore-dangle
 const __dirname = path.dirname(__filename);
 
@@ -78,4 +79,4 @@ export default async (options) => {
   addRoutes(app, options.state || {});
 
   return app;
-};
+};*/

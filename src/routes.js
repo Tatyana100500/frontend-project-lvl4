@@ -1,14 +1,14 @@
-/*const host = '';
+const host = '';
 const prefix = 'api/v1';
 
 export default {
   channelsPath: () => [host, prefix, 'channels'].join('/'),
   channelPath: id => [host, prefix, 'channels', id].join('/'),
   channelMessagesPath: id => [host, prefix, 'channels', id, 'messages'].join('/'),
-};*/
+};
 // @ts-check
 
-import _ from 'lodash';
+/*import _ from 'lodash';
 import HttpErrors from 'http-errors';
 
 const { Unauthorized, Conflict } = HttpErrors;
@@ -145,4 +145,4 @@ export default (app, defaultState = {}) => {
     .get('*', (_req, reply) => {
       reply.view('index.pug');
     });
-};
+};*/
