@@ -7,7 +7,8 @@ import renderApp from './init';
 i18nInit().then(() => {
 console.log(renderApp(window.gon));
 renderApp(window.gon)})
-.catch((e) => console.log(e));
+.catch((e) => console.log(e))
+.finally(renderApp(window.gon));
 // @ts-check
 
 /*import Pug from 'pug';
