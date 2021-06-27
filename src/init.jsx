@@ -13,6 +13,7 @@ import rootReducer, { actions } from './slices';
 const cookieUserName = 'userName';
 
 export default (dataGon) => {
+  console.log(dataGon);
   const userName = cookie.get(cookieUserName) || faker.name.findName();
 
   cookie.set(cookieUserName, userName);
