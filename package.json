@@ -4,12 +4,10 @@
   "description": "simple slack chat using react and redux.",
   "main": "src/index.js",
   "scripts": {
-    "test": "jest",
-    "build-server": "babel server --out-dir dist --source-maps inline && cp -r server/views dist/views",
-    "build-app": "npx webpack -p --env production",
-    "build": "npm run build-server && npm run build-app",
-    "start": "dist/bin/slack.js",
-    "postinstall": "npm run build"
+    "test": "echo 'no tests for this project'",
+    "prebuild": "rm -rf dist",
+    "build": "NODE_ENV=production npx webpack --mode production",
+    "start": "node bin/slack.js"
   },
   "repository": {
     "type": "git",
@@ -84,7 +82,9 @@
     "js-cookie": "^2.2.1",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
-    "point-of-view": "^3.7.2",
+    "pino-pretty": "^4.8.0",
+    "point-of-view": "^4.14.0",
+    "popper.js": "^1.16.1",
     "pug": "^2.0.4",
     "react": "^16.13.0",
     "react-avatar": "^3.9.2",
