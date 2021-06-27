@@ -1,12 +1,9 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../assets/application.css';
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
+import '../assets/applications.scss';
+import i18nInit from './i18nInit';
+import renderApp from './init';
 
-//import gon from 'gon';
+// console.log('gon', window.gon);
 
-import app from './app';
-var gon = require('gon');
-//if (process.env.NODE_ENV !== 'production') {
-//  localStorage.debug = 'chat:*';
-//}
-console.log(gon);
-app(gon);
+i18nInit().then(() => renderApp(window.gon));

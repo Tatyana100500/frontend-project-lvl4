@@ -1,20 +1,22 @@
-
 ---
 
-extends:
-  - airbnb
-  - "plugin:jest/recommended"
-  - "plugin:react/recommended"
+plugins:
+  - babel
+  - react
+
+env:
+  node: true
+  browser: true
+  jest: true
 
 parser: babel-eslint
 
-env:
-  browser: true
-  node: true
-  jest: true
+extends:
+  - 'airbnb-base'
+  - 'plugin:react/recommended'
 
 rules:
+  no-console: 0
   import/no-unresolved: 0
   import/extensions: 0
   react/prop-types: 0
-  no-console: 0

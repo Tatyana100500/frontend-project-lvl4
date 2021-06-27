@@ -1,80 +1,44 @@
-import React from 'react';
-import {
-  ListGroup, Image, Row, Col,
-} from 'react-bootstrap';
+import React, { useContext } from 'react';
+import { useSelector } from 'react-redux';
+import Toast from 'react-bootstrap/Toast';
+import classnames from 'classnames';
+import { Trans } from 'react-i18next';
+import DOMPurify from 'dompurify';
+import { getCurrentChannelMessages } from '../selectors';
+import UserNameContext from '../UserNameContext';
 
-import connect from '../connect';
-import { getMessagesFromChannel } from '../selectors';
+const Message = (props) => {
+  const { text, author, date } = props;
+  const { userName } = useContext(UserNameContext);
+  const isCurrentUserMessage = author === userName;
+  const messageClasses = classnames({
+    'w-75 my-3 mx-5': true,
+    'align-self-end': isCurrentUserMessage,
+    'align-self-start': !isCurrentUserMessage,
+  });
+  return (
+    <div className={messageClasses}>
+      <Toast className="mw-100">
+        <Toast.Header closeButton={false}>
+          <strong className="mr-auto">{author} bbbb</strong>
+          <small><Trans i18nKey="formatDT">{{ date }}</Trans></small>
+        </Toast.Header>
+        <Toast.Body dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(text) }} />
+      </Toast>
+    </div>
+  );
+};
 
-const mapStateToProps = state => ({
-  messages: getMessagesFromChannel(state),
-});
+const Messages = () => {
+  const messages = useSelector((state) => getCurrentChannelMessages(state));
 
-connect(mapStateToProps)
-class Messages extends React.Component {
-  constructor(props) {
-    super(props);
-    this.messageBox = React.createRef();
-  }
-
-  componentDidMount() {
-    this.scrollToBottom();
-  }
-
-  componentDidUpdate(prevProps, prevState, scrollPositionBottom) {
-    if (scrollPositionBottom) {
-      this.scrollToBottom();
-    }
-  }
-
-  getSnapshotBeforeUpdate() {
-    const { scrollHeight, clientHeight, scrollTop } = this.messageBox.current;
-    return scrollTop === scrollHeight - clientHeight;
-  }
-
-  scrollToBottom = () => {
-    const messageBox = this.messageBox.current;
-    const { scrollHeight, clientHeight } = messageBox;
-    messageBox.scrollTop = scrollHeight - clientHeight;
-  }
-
-  renderMessage = (message) => {
-    const {
-      id,
-      text,
-      time,
-      userData: { userName, avatarUrl },
-    } = message;
-
-    return (
-      <ListGroup.Item as="li" key={id} className="px-0">
-        <Row>
-          <Col md="auto">
-            <Image src={avatarUrl} rounded width="60" />
-          </Col>
-          <Col className="pl-0">
-            <p className="mb-1">
-              <span className="mr-2 font-weight-bold">{userName}</span>
-              <small>{time}</small>
-            </p>
-            {text}
-          </Col>
-        </Row>
-      </ListGroup.Item>
-    );
-  }
-
-  render() {
-    const { messages } = this.props;
-
-    return (
-      <div className="p-3 overflow-auto d-flex flex-column-reverse h-100 border-top border-bottom" ref={this.messageBox}>
-        <ListGroup as="ul" variant="flush">
-          {messages.map(this.renderMessage)}
-        </ListGroup>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="d-flex flex-column overflow-auto">
+      {messages.map(({
+        text, author, date, id,
+      }) => <Message key={id} text={text} author={author} date={date} />)}
+    </div>
+  );
+};
 
 export default Messages;

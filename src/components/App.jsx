@@ -1,24 +1,18 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
-
-import Channels from './Channels';
+import NavBar from './NavBar';
+import AddMessageForm from './AddMessageForm';
+import Header from './Header';
 import Messages from './Messages';
-import NewMessageForm from './NewMessageForm';
-import NavigationBar from './NavigationBar';
 
 const App = () => (
-  <Container fluid>
-    <Row>
-      <Col md="2" className="overflow-auto vh-100 p-0 border-right bg-light">
-        <Channels />
-      </Col>
-      <Col className="d-flex flex-column vh-100 p-0">
-        <NavigationBar />
-        <Messages />
-        <NewMessageForm />
-      </Col>
-    </Row>
-  </Container>
+  <div className="d-flex flex-column flex-md-row h-100">
+    <NavBar />
+    <div className="d-flex flex-column flex-grow-1 w-100">
+      <Header />
+      <Messages />
+      <AddMessageForm />
+    </div>
+  </div>
 );
 
 export default App;
