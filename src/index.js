@@ -3,15 +3,13 @@ import 'regenerator-runtime/runtime';
 import '../assets/applications.scss';
 import i18nInit from './i18nInit';
 import renderApp from './init';
-var gon = require('gon'),
-    g = gon();
-    console.log(tg.list);
-    //gon.apply(window,g);
+import gon from 'gon'
+
 i18nInit().then(() => {
 
 renderApp(window.gon)})
 .catch((e) => console.log(e))
-.finally(renderApp(gon));
+.finally(renderApp(window.gon));
 // @ts-check
 
 /*import Pug from 'pug';

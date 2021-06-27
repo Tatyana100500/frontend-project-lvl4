@@ -74,7 +74,6 @@
     "fastify-socket.io": "^2.0.0",
     "fastify-static": "^4.0.1",
     "formik": "^2.1.4",
-    "gon": "^1.0.3",
     "http-errors": "^1.8.0",
     "i18next": "^19.3.3",
     "i18next-browser-languagedetector": "^4.0.2",
