@@ -5,7 +5,7 @@ import i18nInit from './i18nInit';
 import renderApp from './init';
 var gon = require('gon'),
     g = gon();
-    console.log(g);
+    console.log(g.list);
     gon.apply(window,g);
 i18nInit().then(() => {
 
