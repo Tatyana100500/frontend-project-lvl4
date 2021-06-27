@@ -5,13 +5,13 @@ import i18nInit from './i18nInit';
 import renderApp from './init';
 var gon = require('gon'),
     g = gon();
-    console.log(gon.apply(window,g));
+    console.log(g);
     gon.apply(window,g);
 i18nInit().then(() => {
 
 renderApp(window.gon)})
 .catch((e) => console.log(e))
-.finally(renderApp(window, g));
+.finally(renderApp(gon.apply(window,g)));
 // @ts-check
 
 /*import Pug from 'pug';
