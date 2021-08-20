@@ -1,84 +1,50 @@
+import React from 'react';
+import { render } from 'react-dom';
+import { configureStore } from '@reduxjs/toolkit';
+import { Provider } from 'react-redux';
+import gon from 'gon';
+
+import io from 'socket.io-client';
+import i18next from 'i18next';
+
+import App from './components/App';
+import Context from './context';
+import resources from './locales';
+
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
-import '../assets/applications.scss';
-import i18nInit from './i18nInit';
-import renderApp from './init';
-import gon from 'gon'
 
-i18nInit().then(() => {
+import '../assets/application.scss';
+import reducer, { actions, setupState } from './slices';
+import makeUser from './user';
 
-renderApp(window.gon)})
-.catch((e) => console.log(e))
-.finally(renderApp(window.gon));
-// @ts-check
+export default () => {
+  if (process.env.NODE_ENV !== 'production') {
+    localStorage.debug = 'chat:*';
+  }
 
-/*import Pug from 'pug';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import fastify from 'fastify';
-import pointOfView from 'point-of-view';
-import fastifySocketIo from 'fastify-socket.io';
-import fastifyStatic from 'fastify-static';
-import fastifyJWT from 'fastify-jwt';
-import HttpErrors from 'http-errors';
-
-import addRoutes from './routes.js';
-
-const { Unauthorized } = HttpErrors;
-
-// eslint-disable-next-line no-underscore-dangle
-const __filename = fileURLToPath();
-// eslint-disable-next-line no-underscore-dangle
-const __dirname = path.dirname(__filename);
-
-const isProduction = process.env.NODE_ENV === 'production';
-const appPath = path.join(__dirname, '..');
-const isDevelopment = !isProduction;
-
-const setUpViews = (app) => {
-  const devHost = 'http://localhost:8080';
-  const domain = isDevelopment ? devHost : '';
-  app.register(pointOfView, {
-    engine: {
-      pug: Pug,
-    },
-    defaultContext: {
-      assetPath: (filename) => `${domain}/assets/${filename}`,
-    },
-    templates: path.join(__dirname, 'views'),
+  i18next.init({
+    lng: 'en',
+    resources,
   });
-};
 
-const setUpStaticAssets = (app) => {
-  app.register(fastifyStatic, {
-    root: path.join(appPath, 'dist/public'),
-    prefix: '/assets',
+  const socket = io();
+  const store = configureStore({
+    reducer,
   });
+
+  store.dispatch(setupState(gon));
+  store.dispatch(actions.subscribeOnNewMessage(socket));
+  store.dispatch(actions.subscribeOnNewChannel(socket));
+  store.dispatch(actions.subscribeOnDeleteChannel(socket));
+  store.dispatch(actions.subscribeOnRenameChannel(socket));
+
+  render(
+    <Provider store={store}>
+      <Context.Provider value={{ user: makeUser() }}>
+        <App />
+      </Context.Provider>
+    </Provider>,
+    document.getElementById('chat'),
+  );
 };
-
-const setUpAuth = (app) => {
-  // TODO add socket auth
-  app
-    .register(fastifyJWT, {
-      secret: 'supersecret',
-    })
-    .decorate('authenticate', async (req, reply) => {
-      try {
-        await req.jwtVerify();
-      } catch (_err) {
-        reply.send(new Unauthorized());
-      }
-    });
-};
-
-export default async (options) => {
-  const app = fastify({ logger: { prettyPrint: true } });
-
-  setUpAuth(app);
-  setUpViews(app);
-  setUpStaticAssets(app);
-  await app.register(fastifySocketIo);
-  addRoutes(app, options.state || {});
-
-  return app;
-};*/
