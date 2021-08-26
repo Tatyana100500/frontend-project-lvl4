@@ -9,13 +9,14 @@ import i18next from 'i18next';
 
 import App from './components/App';
 import Context from './context';
-import resources from './locales';
+import ru from './locales/ru/translation.json';
+import en from './locales/en/translation.json';
 
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
-import './assets/application.scss';
-import reducer, { actions, setupState } from './slices';
+//import './assets/application.scss';
+import reducer, { actions, asyncActions } from './slices';
 import makeUser from './user';
 
 export default () => {
@@ -24,8 +25,12 @@ export default () => {
   }
 
   i18next.init({
-    lng: 'en',
-    resources,
+	lng: 'ru',
+	fallbackLng: 'en',
+	debug: isDevelopment,
+	resources: {
+	  ru,
+	},
   });
 
   const socket = io();
@@ -33,7 +38,7 @@ export default () => {
     reducer,
   });
 
-  store.dispatch(setupState(gon));
+  store.dispatch(asyncActions(gon));
   store.dispatch(actions.subscribeOnNewMessage(socket));
   store.dispatch(actions.subscribeOnNewChannel(socket));
   store.dispatch(actions.subscribeOnDeleteChannel(socket));
