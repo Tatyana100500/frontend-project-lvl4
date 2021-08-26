@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import { Trans } from 'react-i18next';
 import DOMPurify from 'dompurify';
 import { getCurrentChannelMessages } from '../selectors';
-import UserNameContext from '../UserNameContext';
+import UserNameContext from '../context';
 
 const Message = (props) => {
   const { text, author, date } = props;

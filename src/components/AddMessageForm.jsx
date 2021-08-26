@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Formik, Form, Field } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { asyncActions } from '../slices';
-import UserNameContext from '../UserNameContext';
+import UserNameContext from '../context';
 import Spinner from './Spinner';
 
 const AddMessageForm = () => {

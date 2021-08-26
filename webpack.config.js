@@ -5,12 +5,13 @@ const isDevelopment = !isProduction;
 
 console.log('isProduction', isProduction);
 console.log('isDevelopment', isDevelopment);
+console.log('dirname', __dirname);
 
 module.exports = {
   mode: process.env.NODE_ENV || 'development',
 
   entry: {
-    main: `${__dirname}/src/index.js`,
+    main: `${__dirname}/init.jsx`,
   },
 
   externals: {
@@ -57,3 +58,4 @@ module.exports = {
     ],
   },
 };
+console.log('!!!', module.exports.entry.main)

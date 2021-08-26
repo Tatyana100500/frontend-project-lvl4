@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
-import UserNameContext from '../UserNameContext';
+import UserNameContext from '../context';
 import { actions } from '../slices';
 import {
   getChannels,

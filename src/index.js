@@ -14,7 +14,7 @@ import resources from './locales';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
-import '../assets/application.scss';
+import './assets/application.scss';
 import reducer, { actions, setupState } from './slices';
 import makeUser from './user';
 

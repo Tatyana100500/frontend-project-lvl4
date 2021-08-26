@@ -15,9 +15,10 @@ import addRoutes from './routes';
 const isProduction = process.env.NODE_ENV === 'production';
 const appPath = path.join(__dirname, '..');
 const isDevelopment = !isProduction;
-
+console.log('appPath', appPath);
 const setUpViews = (app) => {
   const domain = isDevelopment ? 'http://localhost:8080' : '';
+  console.log('domain', domain);
   app.register(pointOfView, {
     engine: {
       pug: Pug,
