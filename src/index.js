@@ -27,7 +27,6 @@ export default () => {
   i18next.init({
 	lng: 'ru',
 	fallbackLng: 'en',
-	debug: isDevelopment,
 	resources: {
 	  ru,
 	},
