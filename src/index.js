@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
-import gon from 'gon';
+//import gon from 'gon';
 
 import io from 'socket.io-client';
 import i18next from 'i18next';
@@ -38,7 +38,7 @@ export default () => {
     reducer,
   });
 
-  store.dispatch(asyncActions(gon));
+  ////store.dispatch(asyncActions(gon));
   store.dispatch(actions.subscribeOnNewMessage(socket));
   store.dispatch(actions.subscribeOnNewChannel(socket));
   store.dispatch(actions.subscribeOnDeleteChannel(socket));
