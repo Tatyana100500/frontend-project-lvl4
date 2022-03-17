@@ -2,7 +2,7 @@
   "name": "@hexlet/code",
   "version": "0.0.1",
   "description": "simple slack chat using react and redux.",
-  "main": "dist/init.jsx",
+  "main": "init.jsx",
   "scripts": {
     "test": "echo 'no tests for this project'",
     "prebuild": "rm -rf dist",
