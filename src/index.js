@@ -38,10 +38,10 @@ export default () => {
   });
 
   ////store.dispatch(asyncActions(gon));
-  store.dispatch(actions.subscribeOnNewMessage(socket));
-  store.dispatch(actions.subscribeOnNewChannel(socket));
-  store.dispatch(actions.subscribeOnDeleteChannel(socket));
-  store.dispatch(actions.subscribeOnRenameChannel(socket));
+  store.dispatch(actions.channelAddFetchSuccess(socket));
+  store.dispatch(actions.channelRemoveFetchSuccess(socket));
+  store.dispatch(actions.channelRenameFetchSuccess(socket));
+  store.dispatch(actions.messageFetchSuccess(socket));
 
   render(
     <Provider store={store}>
