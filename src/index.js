@@ -18,7 +18,7 @@ import 'regenerator-runtime/runtime';
 //import './assets/application.scss';
 import reducer, { actions, asyncActions } from './slices';
 import makeUser from './user';
-
+console.log(actions);
 export default () => {
   if (process.env.NODE_ENV !== 'production') {
     localStorage.debug = 'chat:*';
