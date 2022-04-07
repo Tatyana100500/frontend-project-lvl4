@@ -17,6 +17,7 @@ const slice = createSlice({
       state.channels.push(channel);
     },
     channelRenameFetchSuccess: (state, action) => {
+      console.log(action.payload);
       const { id, attributes: { name } } = action.payload;
 
       const [channel] = state.channels.filter((item) => item.id === id);
