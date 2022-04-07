@@ -31,17 +31,17 @@ export default () => {
 	},
   });
 
-  const socket = io();
-  console.log(socket);
+  //const socket = io();
+  //console.log(socket);
   const store = configureStore({
     reducer,
   });
 
   ////store.dispatch(asyncActions(gon));
-  store.dispatch(actions.channelAddFetchSuccess(socket));
-  store.dispatch(actions.channelRemoveFetchSuccess(socket));
-  store.dispatch(actions.channelRenameFetchSuccess(socket));
-  store.dispatch(actions.messageFetchSuccess(socket));
+  //store.dispatch(actions.channelAddFetchSuccess(socket));
+  //store.dispatch(actions.channelRemoveFetchSuccess(socket));
+  //store.dispatch(actions.channelRenameFetchSuccess(socket));
+  //store.dispatch(actions.messageFetchSuccess(socket));
 
   render(
     <Provider store={store}>
