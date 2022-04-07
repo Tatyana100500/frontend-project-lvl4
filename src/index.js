@@ -30,7 +30,7 @@ export default () => {
 	  ru,
 	},
   });
-
+};
   //const socket = io();
   //console.log(socket);
   const store = configureStore({
@@ -51,4 +51,3 @@ export default () => {
     </Provider>,
     document.getElementById('chat'),
   );
-};
