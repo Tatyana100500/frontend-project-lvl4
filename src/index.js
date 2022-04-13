@@ -12,5 +12,5 @@ const render = async () => {
 
   ReactDOM.render(vdom, document.getElementById('chat'));
 };
-
+render();
 export default render;
