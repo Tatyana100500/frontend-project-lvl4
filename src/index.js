@@ -7,10 +7,10 @@ if (process.env.NODE_ENV !== 'production') {
   localStorage.debug = 'chat:*';
 }
 
-export default render = async () => {
+const render = async () => {
   const vdom = await init();
 
   ReactDOM.render(vdom, document.getElementById('chat'));
 };
 
-render();
+export default render;
