@@ -1,44 +1,109 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
-import Toast from 'react-bootstrap/Toast';
-import classnames from 'classnames';
-import { Trans } from 'react-i18next';
-import DOMPurify from 'dompurify';
-import { getCurrentChannelMessages } from '../selectors';
-import UserNameContext from '../context';
+import {
+  Col,
+  Form,
+  InputGroup,
+  Button,
+  Spinner,
+} from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
+import { useFormik } from 'formik';
 
-const Message = (props) => {
-  const { text, author, date } = props;
-  const { userName } = useContext(UserNameContext);
-  const isCurrentUserMessage = author === userName;
-  const messageClasses = classnames({
-    'w-75 my-3 mx-5': true,
-    'align-self-end': isCurrentUserMessage,
-    'align-self-start': !isCurrentUserMessage,
+import { useSocket } from '../hooks/index.js';
+import { messageSchema } from '../validationSchemas.js';
+
+const getUsername = () => localStorage.getItem('username');
+
+const MessagesBox = () => {
+  const { currentChannelId } = useSelector((state) => state.channelsInfo);
+  const { messages } = useSelector((state) => state.messagesInfo);
+
+  return (
+    <div id="messages-box" className="chat-messages overflow-auto mb-3">
+      {messages
+        .filter(({ channelId }) => (Number(channelId) === currentChannelId))
+        .map(({ id, body, username }, i) => {
+          const isSameUser = (i !== 0 && messages[i - 1].username === username);
+          return (
+            <div key={id} className={(i === 0 || isSameUser) ? '' : 'mt-2'}>
+              {!isSameUser
+                && <b>{username}</b>}
+              <div className="text-break">{body}</div>
+            </div>
+          );
+        })}
+    </div>
+  );
+};
+
+const NewMessageForm = () => {
+  const { currentChannelId } = useSelector((state) => state.channelsInfo);
+  const inputRef = useRef();
+  const socket = useSocket();
+
+  const formik = useFormik({
+    initialValues: {
+      body: '',
+    },
+    validationSchema: messageSchema,
+    onSubmit: ({ body }, { resetForm, setSubmitting }) => {
+      setSubmitting(true);
+
+      const message = { body, channelId: currentChannelId, username: getUsername() };
+      socket.emit('newMessage', message, ({ status }) => {
+        if (status === 'ok') {
+          setSubmitting(false);
+
+          resetForm();
+          inputRef.current.focus();
+        }
+      });
+    },
   });
+
+  const { t } = useTranslation();
+
+  useEffect(() => {
+    inputRef.current.focus();
+  }, []);
+
   return (
-    <div className={messageClasses}>
-      <Toast className="mw-100">
-        <Toast.Header closeButton={false}>
-          <strong className="mr-auto">{author} bbbb</strong>
-          <small><Trans i18nKey="formatDT">{{ date }}</Trans></small>
-        </Toast.Header>
-        <Toast.Body dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(text) }} />
-      </Toast>
+    <div className="mt-auto">
+      <Form noValidate onSubmit={formik.handleSubmit}>
+        <InputGroup hasValidation={formik.errors.body}>
+          <Form.Control
+            name="body"
+            aria-label="body"
+            data-testid="new-message"
+            onChange={formik.handleChange}
+            value={formik.values.body}
+            isInvalid={formik.errors.body}
+            ref={inputRef}
+            readOnly={formik.isSubmitting}
+          />
+          <InputGroup.Append>
+            <Button type="submit" disabled={formik.isSubmitting}>
+              {formik.isSubmitting
+                && <Spinner className="mr-1" animation="border" size="sm" />}
+              {t('buttons.send')}
+            </Button>
+          </InputGroup.Append>
+          {formik.errors.body
+            && <Form.Control.Feedback type="invalid">{t(formik.errors.body)}</Form.Control.Feedback>}
+        </InputGroup>
+      </Form>
     </div>
   );
 };
 
-const Messages = () => {
-  const messages = useSelector((state) => getCurrentChannelMessages(state));
-
-  return (
-    <div className="d-flex flex-column overflow-auto">
-      {messages.map(({
-        text, author, date, id,
-      }) => <Message key={id} text={text} author={author} date={date} />)}
+const Messages = () => (
+  <Col className="h-100">
+    <div className="d-flex flex-column h-100">
+      <MessagesBox />
+      <NewMessageForm />
     </div>
-  );
-};
+  </Col>
+);
 
 export default Messages;

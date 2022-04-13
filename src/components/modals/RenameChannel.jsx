@@ -1,84 +1,101 @@
-import React, { useRef, useEffect } from 'react';
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
-import { Formik, Form, Field } from 'formik';
+import React, { useState, useRef, useEffect } from 'react';
+import {
+  Modal,
+  Form,
+  Button,
+  Spinner,
+} from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { connect } from 'react-redux';
-import { actions, asyncActions } from '../../slices';
-import { getCurrentChannel } from '../../selectors';
-import Spinner from '../Spinner';
+import { useSelector } from 'react-redux';
+import { useFormik } from 'formik';
 
-const RenameChannel = (props) => {
-  const {
-    modalName,
-    hideModal,
-    currentChannel,
-  } = props;
+import { useSocket } from '../../hooks/index.js';
+import { channelSchema } from '../../validationSchemas.js';
 
+const RenameChannelForm = ({ onHide }) => {
+  const { channelId, name } = useSelector((state) => state.modal.extra);
   const { t } = useTranslation();
-  const { renameChannel } = asyncActions.useRenameChannel();
+  const socket = useSocket();
 
-  const handleHideModal = () => hideModal();
+  const nameRef = useRef();
 
-  const handleSubmit = async (formValues, formActions) => {
-    const { newChannelName } = formValues;
+  const formik = useFormik({
+    initialValues: {
+      name,
+    },
+    validationSchema: channelSchema,
+    onSubmit: ({ name: newName }, { setSubmitting }) => {
+      setSubmitting(true);
 
-    if (newChannelName.trim() === '') {
-      return;
-    }
+      const channel = { id: channelId, name: newName };
 
-    const { resetForm, setSubmitting } = formActions;
+      socket.emit('renameChannel', channel, ({ status }) => {
+        if (status === 'ok') {
+          onHide();
+        }
+      });
+    },
+  });
 
-    await renameChannel({ ...currentChannel, name: newChannelName });
-
-    setSubmitting(false);
-    resetForm();
-    hideModal();
-  };
-
-  const input = useRef(null);
-  useEffect(() => input?.current?.focus());
+  useEffect(() => {
+    nameRef.current.select();
+  }, []);
 
   return (
-    <Modal show={modalName === 'renameChannel'} onHide={handleHideModal}>
+    <Form onSubmit={formik.handleSubmit}>
+      <Form.Group>
+        <Form.Control
+          name="name"
+          aria-label="Rename channel"
+          data-testid="rename-channel"
+          className="mb-2"
+          onChange={formik.handleChange}
+          value={formik.values.name}
+          isInvalid={formik.errors.name}
+          readOnly={formik.isSubmitting}
+          ref={nameRef}
+        />
+        {formik.errors.name
+          && <Form.Control.Feedback type="invalid">{t(formik.errors.name)}</Form.Control.Feedback>}
+      </Form.Group>
+      <div className="d-flex justify-content-end border-top pt-2">
+        <Button
+          type="button"
+          className="mr-2"
+          variant="secondary"
+          onClick={onHide}
+          disabled={formik.isSubmitting}
+        >
+          {t('buttons.cancel')}
+        </Button>
+        <Button type="submit" data-testid="rename-button" disabled={formik.isSubmitting}>
+          {formik.isSubmitting
+            && <Spinner className="mr-1" animation="border" size="sm" />}
+          {t('buttons.rename')}
+        </Button>
+      </div>
+    </Form>
+  );
+};
+
+const RenameChannel = ({ onExited }) => {
+  const [show, setShow] = useState(true);
+  const { t } = useTranslation();
+
+  const onHide = () => {
+    setShow(false);
+  };
+
+  return (
+    <Modal show={show} onHide={onHide} onExited={onExited}>
       <Modal.Header closeButton>
-        <Modal.Title>{t('modals.channelRenameTitle')}</Modal.Title>
+        <Modal.Title>{t('texts.renameChannel')}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Formik initialValues={{ newChannelName: currentChannel.name }} onSubmit={handleSubmit}>
-          {({ isSubmitting }) => (
-            <Form className="form-inline w-100 justify-content-between">
-              <Field
-                name="newChannelName"
-                type="text"
-                placeholder={t('modals.placeholderRenameChannel')}
-                disabled={isSubmitting}
-                className="form-control flex-grow-1 mx-1 my-1"
-                innerRef={input}
-              />
-              <Button
-                type="submit"
-                variant="info"
-                className="col-sm-auto mx-1 my-1"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? <Spinner /> : t('modals.btnOk')}
-              </Button>
-            </Form>
-          )}
-        </Formik>
+        <RenameChannelForm onHide={onHide} />
       </Modal.Body>
     </Modal>
   );
 };
 
-const mapStateToProps = (state) => ({
-  modalName: state.app.modalName,
-  currentChannel: getCurrentChannel(state),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  hideModal: () => dispatch(actions.hideModal()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(RenameChannel);
+export default RenameChannel;

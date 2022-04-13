@@ -1,65 +1,65 @@
-import React from 'react';
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
-import { useTranslation, Trans } from 'react-i18next';
-import { Formik, Form } from 'formik';
-import { connect } from 'react-redux';
-import { actions, asyncActions } from '../../slices';
-import { getCurrentChannel } from '../../selectors';
-import Spinner from '../Spinner';
+import React, { useState } from 'react';
+import { Modal, Button, Spinner } from 'react-bootstrap';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
-const RemoveChannel = (props) => {
-  const {
-    modalName,
-    hideModal,
-    currentChannel,
-  } = props;
+import { useSocket } from '../../hooks/index.js';
 
+const RemoveChannel = ({ onExited }) => {
+  const [show, setShow] = useState(true);
+  const [pending, setPending] = useState(false);
   const { t } = useTranslation();
-  const { removeChannel } = asyncActions.useRemoveChannel();
+  const { channelId } = useSelector((state) => state.modal.extra);
+  const socket = useSocket();
 
-  const handleHideModal = () => hideModal();
+  const onHide = () => {
+    setShow(false);
+  };
 
-  const handleSubmit = async () => {
-    await removeChannel(currentChannel);
+  const handleRemoveChannel = () => {
+    setPending(true);
 
-    hideModal();
+    const channel = { id: channelId };
+
+    socket.emit('removeChannel', channel, ({ status }) => {
+      if (status === 'ok') {
+        onHide();
+      }
+    });
   };
 
   return (
-    <Modal show={modalName === 'removeChannel'} onHide={handleHideModal}>
+    <Modal show={show} onHide={onHide} onExited={onExited}>
       <Modal.Header closeButton>
-        <Modal.Title>{t('modals.channelRemoveTitle')}</Modal.Title>
+        <Modal.Title>{t('texts.removeChannel')}</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
-        <Trans i18nKey="modals.confirmChannelRemove">{{ name: currentChannel.name }}</Trans>
-      </Modal.Body>
+      <Modal.Body>{t('texts.areYouSure')}</Modal.Body>
       <Modal.Footer>
-        <Formik initialValues={{}} onSubmit={handleSubmit}>
-          {({ isSubmitting }) => (
-            <Form>
-              <Button
-                variant="primary"
-                disabled={isSubmitting}
-                type="submit"
-              >
-                {isSubmitting ? <Spinner /> : t('modals.btnOk')}
-              </Button>
-            </Form>
-          )}
-        </Formik>
+        <div>
+          <Button
+            type="button"
+            variant="secondary"
+            className="mr-2"
+            onClick={onHide}
+            disabled={pending}
+          >
+            {t('buttons.cancel')}
+          </Button>
+          <Button
+            type="button"
+            variant="danger"
+            data-testid="remove-button"
+            disabled={pending}
+            onClick={handleRemoveChannel}
+          >
+            {pending
+              && <Spinner className="mr-1" animation="border" size="sm" />}
+            {t('buttons.remove')}
+          </Button>
+        </div>
       </Modal.Footer>
     </Modal>
   );
 };
 
-const mapStateToProps = (state) => ({
-  modalName: state.app.modalName,
-  currentChannel: getCurrentChannel(state),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  hideModal: () => dispatch(actions.hideModal()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(RemoveChannel);
+export default RemoveChannel;

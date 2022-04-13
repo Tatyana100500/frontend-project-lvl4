@@ -1,11 +1,11 @@
-import AddChannel from './AddChannel';
-import RenameChannel from './RenameChannel';
-import RemoveChannel from './RemoveChannel';
+import AddChannel from './AddChannel.jsx';
+import RemoveChannel from './RemoveChannel.jsx';
+import RenameChannel from './RenameChannel.jsx';
 
-const mappingModalName = {
+const modals = {
   addChannel: AddChannel,
-  renameChannel: RenameChannel,
   removeChannel: RemoveChannel,
+  renameChannel: RenameChannel,
 };
 
-export default (typeModal) => mappingModalName[typeModal];
+export default (modalName) => modals[modalName];
