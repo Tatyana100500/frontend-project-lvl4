@@ -13,8 +13,10 @@ import store from './store.js';
 import App from './components/App.jsx';
 import { addChannel, removeChannel, renameChannel } from './slices/channelsInfoSlice.js';
 import { addMessage } from './slices/messagesInfoSlice.js';
-
+console.log(store);
+console.log(io);
 export default async (socketClient = io()) => {
+	console.log(socketClient);
   const i18nInstance = i18n.createInstance();
 
   const lng = localStorage.getItem('lang') || 'en';
@@ -27,7 +29,7 @@ export default async (socketClient = io()) => {
     });
 
   const socket = socketClient;
-
+console.log(socket);
   socket.on('newMessage', (message) => {
     store.dispatch(addMessage({ message }));
   });
