@@ -23,3 +23,9 @@ restart:
 	rm -rf dist
 	npm run build
 	heroku local -f Procfile.dev
+
+test:
+	npm test -s
+
+test-with-coverage:
+	npm test -- --coverage

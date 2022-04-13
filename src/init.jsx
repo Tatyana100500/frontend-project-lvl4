@@ -30,6 +30,11 @@ export default async (socketClient = io()) => {
 
   const socket = socketClient;
 console.log(socket);
+
+ socket.on('connect', (message) => {
+    console.log("######232323232#####");
+  });
+
   socket.on('newMessage', (message) => {
     store.dispatch(addMessage({ message }));
   });
