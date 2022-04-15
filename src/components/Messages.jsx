@@ -81,6 +81,7 @@ const NewMessageForm = () => {
             isInvalid={formik.errors.body}
             ref={inputRef}
             readOnly={formik.isSubmitting}
+			disabled={formik.isSubmitting}
           />
           <InputGroup.Append>
             <Button type="submit" disabled={formik.isSubmitting}>
