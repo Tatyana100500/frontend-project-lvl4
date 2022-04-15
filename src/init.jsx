@@ -19,7 +19,7 @@ export default async (socketClient = io()) => {
 	console.log(socketClient);
   const i18nInstance = i18n.createInstance();
 
-  const lng = localStorage.getItem('lang') || 'en';
+  const lng = localStorage.getItem('lang') || 'ru';
 
   await i18nInstance
     .use(initReactI18next)
