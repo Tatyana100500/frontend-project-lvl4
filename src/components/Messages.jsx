@@ -72,7 +72,6 @@ const NewMessageForm = () => {
     <div className="mt-auto">
       <Form noValidate onSubmit={formik.handleSubmit}>
         <InputGroup hasValidation={formik.errors.body}>
-		<Form.Label htmlFor="body">{t('labels.newmessage')}</Form.Label>
           <Form.Control
             name="body"
             aria-label="Новое сообщение"
