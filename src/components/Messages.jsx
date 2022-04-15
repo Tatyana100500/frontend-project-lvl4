@@ -53,13 +53,11 @@ const NewMessageForm = () => {
       const message = { body, channelId: currentChannelId, username: getUsername() };
       socket.emit('newMessage', message, ({ status }) => {
         if (status === 'ok') {
-          setSubmitting(false);
+	    message.body = '';
+				
+		resetForm({ values: { body: '', },});
+        setSubmitting(false);
 
-          resetForm({
-			values: {
-			  body: '',
-			},
-		  });
           inputRef.current.focus();
         }
       });
