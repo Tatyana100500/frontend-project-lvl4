@@ -75,7 +75,7 @@ const NewMessageForm = () => {
 		<Form.Label htmlFor="body">{t('labels.newmessage')}</Form.Label>
           <Form.Control
             name="body"
-            aria-label="body"
+            aria-label="Новое сообщение"
             data-testid="new-message"
             onChange={formik.handleChange}
             value={formik.values.body}
