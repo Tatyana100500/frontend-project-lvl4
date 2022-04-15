@@ -55,7 +55,11 @@ const NewMessageForm = () => {
         if (status === 'ok') {
           setSubmitting(false);
 
-          resetForm();
+          resetForm({
+			values: {
+			  body: '',
+			},
+		  });
           inputRef.current.focus();
         }
       });
@@ -81,7 +85,6 @@ const NewMessageForm = () => {
             isInvalid={formik.errors.body}
             ref={inputRef}
             readOnly={formik.isSubmitting}
-			disabled={formik.isSubmitting}
           />
           <InputGroup.Append>
             <Button type="submit" disabled={formik.isSubmitting}>
