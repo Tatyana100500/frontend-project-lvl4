@@ -5,6 +5,7 @@ export default {
       password: 'Password',
       confirmPassword: 'Confirm password',
       username: 'Username',
+	  newmessage: 'New message',
     },
     buttons: {
       signUp: 'Sign up',

@@ -5,6 +5,7 @@ export default {
 		password: 'Пароль',
 		confirmPassword: 'Подтвердите пароль',
 		username: 'Имя пользователя',
+		newmessage: 'Новое сообщение',
 	  },
 	  buttons: {
 		signUp: 'Зарегистрироваться',
