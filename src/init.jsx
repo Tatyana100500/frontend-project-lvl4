@@ -7,7 +7,7 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import { Provider } from 'react-redux';
 import { io } from 'socket.io-client';
-
+import { ToastContainer } from 'react-toastify';
 import resources from './locales/index.js';
 import store from './store.js';
 import App from './components/App.jsx';
@@ -27,7 +27,7 @@ export default async (socketClient = io()) => {
       lng,
       resources,
     });
-
+	const toastAutoCloseTime = 5000;
   const socket = socketClient;
 console.log(socket);
 
@@ -53,7 +53,18 @@ console.log(socket);
 
   return (
     <Provider store={store}>
-      <App socket={socket} />
+      <App socket={socket} /> 
+	  <ToastContainer
+        position="top-right"
+        autoClose={toastAutoCloseTime}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        />
     </Provider>
   );
 };
