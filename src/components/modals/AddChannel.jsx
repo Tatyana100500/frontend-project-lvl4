@@ -7,7 +7,7 @@ import {
 } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
-
+import { toast } from 'react-toastify';
 import { useSocket } from '../../hooks/index.js';
 import { channelSchema } from '../../validationSchemas.js';
 
@@ -29,6 +29,7 @@ const AddChannelForm = ({ onHide }) => {
 
       socket.emit('newChannel', channel, ({ status }) => {
         if (status === 'ok') {
+		  toast.success(t('toastLabels.channelAdded'));
           onHide();
         }
       });

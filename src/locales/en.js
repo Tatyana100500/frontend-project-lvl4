@@ -1,5 +1,8 @@
 export default {
   translation: {
+	toastLabels: {
+	channelAdded: 'Channel added',
+	},
     labels: {
       yourNickname: 'Your nickname',
       password: 'Password',
