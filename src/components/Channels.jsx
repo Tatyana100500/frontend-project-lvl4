@@ -45,7 +45,7 @@ const RemovableChannel = ({
     <Dropdown.Toggle
       split
       variant={buttonVariant}
-	  role={Button}
+	  role="button"
       className="flex-grow-0"
       data-testid="channel-dropdown"
     />
