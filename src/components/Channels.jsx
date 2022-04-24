@@ -92,7 +92,7 @@ const Channels = () => {
           <Nav.Item key={id}>
             <Channel
               name={name}
-			  aria-label="Имя канала"
+			
               buttonVariant={getButtonVariant(id)}
               onClick={handleClickChannel(id)}
               onRemove={handleRemoveChannel(id)}
