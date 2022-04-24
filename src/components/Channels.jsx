@@ -35,6 +35,7 @@ const RemovableChannel = ({
   <Dropdown as={ButtonGroup} className="d-flex mb-2">
     <Nav.Link
       as={Button}
+	  role="button"
       variant={buttonVariant}
       onClick={onClick}
       className="text-left flex-grow-1"
@@ -44,6 +45,7 @@ const RemovableChannel = ({
     <Dropdown.Toggle
       split
       variant={buttonVariant}
+	  role={Button}
       className="flex-grow-0"
       data-testid="channel-dropdown"
     />
@@ -59,6 +61,7 @@ const Channels = () => {
   const dispatch = useDispatch();
 
   const { t } = useTranslation();
+  console.log(t);
 
   const getButtonVariant = (id) => (id === currentChannelId ? 'primary' : 'light');
 
