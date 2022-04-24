@@ -1,16 +1,16 @@
 export default {
   translation: {
-	toastLabels: {
-	channelAdded: 'Channel added',
-	channelRemoved: 'Channel removed',
-    channelRenamed: 'Channel renamed',
-	},
+    toastLabels: {
+      channelAdded: 'Channel added',
+      channelRemoved: 'Channel removed',
+      channelRenamed: 'Channel renamed',
+    },
     labels: {
       yourNickname: 'Your nickname',
       password: 'Password',
       confirmPassword: 'Confirm password',
       username: 'Username',
-	  newmessage: 'New message',
+      newmessage: 'New message',
     },
     buttons: {
       signUp: 'Sign up',

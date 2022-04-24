@@ -23,7 +23,7 @@ const RemoveChannel = ({ onExited }) => {
 
     socket.emit('removeChannel', channel, ({ status }) => {
       if (status === 'ok') {
-		toast.success(t('toastLabels.channelRemoved'));
+        toast.success(t('toastLabels.channelRemoved'));
         onHide();
       }
     });
@@ -49,7 +49,6 @@ const RemoveChannel = ({ onExited }) => {
           <Button
             type="button"
             variant="danger"
-			
             data-testid="remove-button"
             disabled={pending}
             onClick={handleRemoveChannel}

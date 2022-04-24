@@ -14,4 +14,3 @@ const render = async () => {
 };
 
 render();
-//export default render;

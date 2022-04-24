@@ -35,7 +35,7 @@ const RemovableChannel = ({
   <Dropdown as={ButtonGroup} className="d-flex mb-2">
     <Nav.Link
       as={Button}
-	  role="button"
+      role="button"
       variant={buttonVariant}
       onClick={onClick}
       className="text-left flex-grow-1"
@@ -45,11 +45,12 @@ const RemovableChannel = ({
     <Dropdown.Toggle
       split
       variant={buttonVariant}
-	  role="button"
+      role="button"
       className="flex-grow-0"
       data-testid="channel-dropdown"
-    >Управление каналом
-	</Dropdown.Toggle>
+    >
+    Управление каналом
+    </Dropdown.Toggle>
     <Dropdown.Menu data-testid="channel-dropdown-menu">
       <Dropdown.Item onClick={onRemove}>{t('buttons.remove')}</Dropdown.Item>
       <Dropdown.Item onClick={onRename}>{t('buttons.rename')}</Dropdown.Item>
@@ -92,7 +93,6 @@ const Channels = () => {
           <Nav.Item key={id}>
             <Channel
               name={name}
-			
               buttonVariant={getButtonVariant(id)}
               onClick={handleClickChannel(id)}
               onRemove={handleRemoveChannel(id)}

@@ -70,12 +70,12 @@ import React, {
 	  onSubmit: handleSubmit,
 	});
   
-	return (
-	  <FormContainer>
-		<Form data-testid="login-form" className="p-3" onSubmit={formik.handleSubmit}>
-		  <Form.Group>
-			<Form.Label htmlFor="username">{t('labels.yourNickname')}</Form.Label>
-			<Form.Control
+  return (
+    <FormContainer>
+      <Form data-testid="login-form" className="p-3" onSubmit={formik.handleSubmit}>
+        <Form.Group>
+          <Form.Label htmlFor="username">{t('labels.yourNickname')}</Form.Label>
+          <Form.Control
 			  name="username"
 			  id="username"
 			  autoComplete="username"
@@ -86,11 +86,11 @@ import React, {
 			  readOnly={formik.isSubmitting}
 			  ref={usernameRef}
 			  isInvalid={!!error}
-			/>
-		  </Form.Group>
-		  <Form.Group>
-			<Form.Label htmlFor="password">{t('labels.password')}</Form.Label>
-			<Form.Control
+          />
+        </Form.Group>
+        <Form.Group>
+          <Form.Label htmlFor="password">{t('labels.password')}</Form.Label>
+          <Form.Control
 			  name="password"
 			  id="password"
 			  autoComplete="current-password"
@@ -103,17 +103,17 @@ import React, {
 			/>
 			{error
 			  && <Form.Control.Feedback type="invalid">{t(`errors.${error}`)}</Form.Control.Feedback>}
-		  </Form.Group>
-		  <Button
+        </Form.Group>
+        <Button
 			type="submit"
 			variant="outline-primary"
 			className="w-100 mb-3"
 			disabled={formik.isSubmitting}
-		  >
+        >
 			{formik.isSubmitting
 			  && <Spinner className="mr-1" animation="border" size="sm" />}
 			{t('buttons.logIn')}
-		  </Button>
+        </Button>
 		  <div className="text-center">
 			<span>
 			  {t('texts.noAccount')}
@@ -123,7 +123,6 @@ import React, {
 		  </div>
 		</Form>
 	  </FormContainer>
-	);
-  };
-  
-  export default Login;
+  );
+};
+export default Login;

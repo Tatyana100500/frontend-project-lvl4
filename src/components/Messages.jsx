@@ -9,7 +9,6 @@ import {
 } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useFormik } from 'formik';
-//import { toast } from 'react-toastify';
 import filter from 'leo-profanity';
 import { useSocket } from '../hooks/index.js';
 import { messageSchema } from '../validationSchemas.js';
@@ -43,7 +42,7 @@ const NewMessageForm = () => {
   const inputRef = useRef();
   const socket = useSocket();
 
- const formik = useFormik({
+  const formik = useFormik({
     initialValues: {
       body: '',
     },
@@ -51,47 +50,18 @@ const NewMessageForm = () => {
     onSubmit: ({ body }, { resetForm, setSubmitting }) => {
       setSubmitting(true);
 
-      const message = { body: filter.clean(body), channelId: currentChannelId, username: getUsername() };
+      const message = { 
+        body: filter.clean(body), channelId: currentChannelId, username: getUsername() };
       socket.emit('newMessage', message, ({ status }) => {
         if (status === 'ok') {
-	    
-				
-		
-        setSubmitting(false);
-		resetForm();
+          setSubmitting(false);
+          resetForm();
           inputRef.current.focus();
         }
       });
     },
   });
-  /*const formik = useFormik({
-    initialValues: {
-		body: '',
-    },
-	validationSchema: messageSchema,
-    onSubmit: async ({ body }, actions) => {
-      if (body === '') {
-        return;
-      }
-      try {
-        await sendMessage({
-          text: filter.clean(body),
-          username: getUsername(),
-          channelId: currentChannelId,
-        });
-        actions.resetForm({
-          values: {
-            body: '',
-          },
-        });
-        actions.setSubmitting(false);
-      } catch (error) {
-        rollbar.error(error);
-        toast.error(t('errors.connectionFailed'));
-      }
-      inputRef.current.focus();
-    },
-  });*/
+
   const { t } = useTranslation();
 
   useEffect(() => {
