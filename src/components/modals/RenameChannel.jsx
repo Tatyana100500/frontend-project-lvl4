@@ -46,7 +46,7 @@ const RenameChannelForm = ({ onHide }) => {
       <Form.Group>
         <Form.Control
           name="name"
-          aria-label="Rename channel"
+		  aria-label="Имя канала"
           data-testid="rename-channel"
           className="mb-2"
 		  type="text"
@@ -69,7 +69,7 @@ const RenameChannelForm = ({ onHide }) => {
         >
           {t('buttons.cancel')}
         </Button>
-        <Button type="submit" aria-label="Имя канала" data-testid="rename-button" disabled={formik.isSubmitting}>
+        <Button type="submit" data-testid="rename-button" disabled={formik.isSubmitting}>
           {formik.isSubmitting
             && <Spinner className="mr-1" animation="border" size="sm" />}
           {t('buttons.rename')}
