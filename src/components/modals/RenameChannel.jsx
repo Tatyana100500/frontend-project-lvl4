@@ -46,10 +46,9 @@ const RenameChannelForm = ({ onHide }) => {
       <Form.Group>
         <Form.Control
           name="name"
-		  aria-label="Имя канала"
+          aria-label="Имя канала"
           data-testid="rename-channel"
           className="mb-2"
-		  type="text"
           onChange={formik.handleChange}
           value={formik.values.name}
           isInvalid={formik.errors.name}
