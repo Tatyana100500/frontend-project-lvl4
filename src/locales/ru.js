@@ -2,6 +2,8 @@ export default {
 	translation: {
 	  toastLabels: {
 		channelAdded: 'Канал создан',
+		channelRemoved: 'Канал удалён',
+        channelRenamed: 'Канал переименован',
 	  },
 	  labels: {
 		yourNickname: 'Ваш ник',

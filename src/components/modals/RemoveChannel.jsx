@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Modal, Button, Spinner } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-
+import { toast } from 'react-toastify';
 import { useSocket } from '../../hooks/index.js';
 
 const RemoveChannel = ({ onExited }) => {
@@ -23,6 +23,7 @@ const RemoveChannel = ({ onExited }) => {
 
     socket.emit('removeChannel', channel, ({ status }) => {
       if (status === 'ok') {
+		toast.success(t('toastLabels.channelRemoved'));
         onHide();
       }
     });
@@ -48,7 +49,7 @@ const RemoveChannel = ({ onExited }) => {
           <Button
             type="button"
             variant="danger"
-			aria-label="Имя канала"
+			
             data-testid="remove-button"
             disabled={pending}
             onClick={handleRemoveChannel}

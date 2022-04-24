@@ -8,7 +8,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
-
+import { toast } from 'react-toastify';
 import { useSocket } from '../../hooks/index.js';
 import { channelSchema } from '../../validationSchemas.js';
 
@@ -31,6 +31,7 @@ const RenameChannelForm = ({ onHide }) => {
 
       socket.emit('renameChannel', channel, ({ status }) => {
         if (status === 'ok') {
+		  toast.success(t('toastLabels.channelRenamed'));
           onHide();
         }
       });
