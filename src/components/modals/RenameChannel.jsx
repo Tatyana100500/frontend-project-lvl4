@@ -49,6 +49,7 @@ const RenameChannelForm = ({ onHide }) => {
           aria-label="Rename channel"
           data-testid="rename-channel"
           className="mb-2"
+		  type="text"
           onChange={formik.handleChange}
           value={formik.values.name}
           isInvalid={formik.errors.name}
