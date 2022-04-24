@@ -50,7 +50,7 @@ const RemovableChannel = ({
       data-testid="channel-dropdown"
     >Управление каналом
 	</Dropdown.Toggle>
-    <Dropdown.Menu data-testid="channel-dropdown-menu">
+    <Dropdown.Menu aria-label="Имя канала" data-testid="channel-dropdown-menu">
       <Dropdown.Item onClick={onRemove}>{t('buttons.remove')}</Dropdown.Item>
       <Dropdown.Item onClick={onRename}>{t('buttons.rename')}</Dropdown.Item>
     </Dropdown.Menu>

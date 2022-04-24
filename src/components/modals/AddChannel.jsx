@@ -29,8 +29,9 @@ const AddChannelForm = ({ onHide }) => {
 
       socket.emit('newChannel', channel, ({ status }) => {
         if (status === 'ok') {
-		  toast.success(t('toastLabels.channelAdded'));
+		 
           onHide();
+		  toast.success();
         }
       });
     },
