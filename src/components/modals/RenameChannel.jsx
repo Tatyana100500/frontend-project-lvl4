@@ -71,7 +71,7 @@ const RenameChannelForm = ({ onHide }) => {
         <Button type="submit" data-testid="rename-button" disabled={formik.isSubmitting}>
           {formik.isSubmitting
             && <Spinner className="mr-1" animation="border" size="sm" />}
-          {t('buttons.rename')}
+          Добавить
         </Button>
       </div>
     </Form>
