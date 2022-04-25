@@ -33,7 +33,8 @@ const Chat = () => {
   const [contentLoaded, setContentLoaded] = useState(false);
 
   useEffect(() => {
-    let mounted = true;
+    let mounted;
+	mounted = true;
 
     const fetchData = async () => {
       const url = routes.data();
