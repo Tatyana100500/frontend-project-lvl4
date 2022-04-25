@@ -33,31 +33,22 @@ const Chat = () => {
   const [contentLoaded, setContentLoaded] = useState(false);
 
   useEffect(() => {
-
-
     const fetchData = async () => {
       const url = routes.data();
       try {
         const res = await axios.get(url, { headers: getAuthorizationHeader() });
-
         dispatch(setInitialState(res.data));
-
         socket.auth = { token: getToken() };
-
         setContentLoaded(true);
-
       } catch (e) {
         if (e.isAxiosError) {
           auth.logOut();
           return;
         }
-
         throw e;
       }
     };
-
     fetchData();
-
   }, []);
 
   return contentLoaded ? (
