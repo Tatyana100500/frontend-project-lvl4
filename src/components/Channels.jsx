@@ -48,7 +48,7 @@ const RemovableChannel = ({
       role="button"
       className="flex-grow-0"
       data-testid="channel-dropdown"
-    >
+      >
     Управление каналом
     </Dropdown.Toggle>
     <Dropdown.Menu data-testid="channel-dropdown-menu">

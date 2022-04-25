@@ -48,15 +48,15 @@ export default async (socketClient = io()) => {
     <Provider store={store}>
       <App socket={socket} />
       <ToastContainer
-  position="top-right"
-  autoClose={toastAutoCloseTime}
-  hideProgressBar={false}
-  newestOnTop={false}
-  closeOnClick
-  rtl={false}
-  pauseOnFocusLoss
-  draggable
-  pauseOnHover
+        position="top-right"
+        autoClose={toastAutoCloseTime}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
       />
     </Provider>
   );
