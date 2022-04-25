@@ -53,7 +53,7 @@ const NewMessageForm = () => {
       const message = {
         body: filter.clean(body),
         channelId: currentChannelId,
-        username: getUsername()
+        username: getUsername(),
       };
       socket.emit('newMessage', message, ({ status }) => {
         if (status === 'ok') {

@@ -2,8 +2,7 @@ import React from 'react';
 import { Spinner as SpinnerBS } from 'react-bootstrap';
 
 const Spinner = () =>
-  (
-    <SpinnerBS
+  (<SpinnerBS
       as="span"
       animation="border"
       size="sm"
