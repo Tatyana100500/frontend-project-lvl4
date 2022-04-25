@@ -33,7 +33,7 @@ const Chat = () => {
   const [contentLoaded, setContentLoaded] = useState(false);
 
   useEffect(() => {
-    //let mounted = true;
+
 
     const fetchData = async () => {
       const url = routes.data();
@@ -44,9 +44,8 @@ const Chat = () => {
 
         socket.auth = { token: getToken() };
 
-        //if (mounted) {
-          setContentLoaded(true);
-        //}
+        setContentLoaded(true);
+
       } catch (e) {
         if (e.isAxiosError) {
           auth.logOut();
@@ -59,9 +58,6 @@ const Chat = () => {
 
     fetchData();
 
-    //return () => {
-     // mounted = false;
-    //};
   }, []);
 
   return contentLoaded ? (
