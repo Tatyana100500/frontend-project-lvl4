@@ -1,8 +1,9 @@
 import React from 'react';
 import { Spinner as SpinnerBS } from 'react-bootstrap';
 
-const Spinner = () =>
-  (<SpinnerBS
+const Spinner = () => {
+  return (
+    <SpinnerBS
       as="span"
       animation="border"
       size="sm"
@@ -10,5 +11,5 @@ const Spinner = () =>
       aria-hidden="true"
     />
   );
-
+};
 export default Spinner;
