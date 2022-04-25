@@ -50,8 +50,11 @@ const NewMessageForm = () => {
     onSubmit: ({ body }, { resetForm, setSubmitting }) => {
       setSubmitting(true);
 
-      const message = { body: filter.clean(body),
-        channelId: currentChannelId, username: getUsername() };
+      const message = {
+        body: filter.clean(body),
+        channelId: currentChannelId,
+        username: getUsername()
+      };
       socket.emit('newMessage', message, ({ status }) => {
         if (status === 'ok') {
           setSubmitting(false);

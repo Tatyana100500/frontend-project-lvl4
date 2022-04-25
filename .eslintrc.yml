@@ -47,4 +47,5 @@ rules:
   functional/no-try-statement: 0
   functional/no-throw-statement: 0
   testing-library/no-debug: 0
-  no-param-reassign: ["error", { "props": false }]
+  no-param-reassign: 0
+  react-hooks/rules-of-hooks: 'error'

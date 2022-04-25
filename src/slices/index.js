@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from '@reduxjs/toolkit';
 import app, { actions as appActions } from './appSlice';
 import
 channels,

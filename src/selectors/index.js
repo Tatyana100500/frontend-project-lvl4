@@ -1,4 +1,4 @@
-import { createSelector } from 'reselect';
+import { createSelector } from '@reduxjs/toolkit';
 import { countBy } from 'lodash';
 
 const getMessages = (state) => state.messages.messages;

@@ -76,53 +76,53 @@ const Login = () => {
         <Form.Group>
           <Form.Label htmlFor="username">{t('labels.yourNickname')}</Form.Label>
           <Form.Control
-			  name="username"
-			  id="username"
-			  autoComplete="username"
-			  required
-			  type="text"
-			  onChange={formik.handleChange}
-			  value={formik.values.username}
-			  readOnly={formik.isSubmitting}
-			  ref={usernameRef}
-			  isInvalid={!!error}
+            name="username"
+            id="username"
+            autoComplete="username"
+            required
+            type="text"
+            onChange={formik.handleChange}
+            value={formik.values.username}
+            readOnly={formik.isSubmitting}
+            ref={usernameRef}
+            isInvalid={!!error}
           />
         </Form.Group>
         <Form.Group>
           <Form.Label htmlFor="password">{t('labels.password')}</Form.Label>
           <Form.Control
-			  name="password"
-			  id="password"
-			  autoComplete="current-password"
-			  required
-			  type="password"
-			  onChange={formik.handleChange}
-			  value={formik.values.password}
-			  readOnly={formik.isSubmitting}
-			  isInvalid={!!error}
-			/>
-			{error
-			  && <Form.Control.Feedback type="invalid">{t(`errors.${error}`)}</Form.Control.Feedback>}
+            name="password"
+            id="password"
+            autoComplete="current-password"
+            required
+            type="password"
+            onChange={formik.handleChange}
+            value={formik.values.password}
+            readOnly={formik.isSubmitting}
+            isInvalid={!!error}
+          />
+          {error
+            && <Form.Control.Feedback type="invalid">{t(`errors.${error}`)}</Form.Control.Feedback>}
         </Form.Group>
         <Button
-			type="submit"
-			variant="outline-primary"
-			className="w-100 mb-3"
-			disabled={formik.isSubmitting}
+          type="submit"
+          variant="outline-primary"
+          className="w-100 mb-3"
+          disabled={formik.isSubmitting}
         >
-			{formik.isSubmitting
-			  && <Spinner className="mr-1" animation="border" size="sm" />}
-			{t('buttons.logIn')}
+          {formik.isSubmitting
+            && <Spinner className="mr-1" animation="border" size="sm" />}
+          {t('buttons.logIn')}
         </Button>
-		  <div className="text-center">
-			<span>
-			  {t('texts.noAccount')}
-			  &nbsp;
-			  <Link to="/signup">{t('texts.registration')}</Link>
-			</span>
-		  </div>
-		</Form>
-	  </FormContainer>
+        <div className="text-center">
+          <span>
+            {t('texts.noAccount')}
+            &nbsp;
+            <Link to="/signup">{t('texts.registration')}</Link>
+          </span>
+        </div>
+      </Form>
+    </FormContainer>
   );
 };
 export default Login;
