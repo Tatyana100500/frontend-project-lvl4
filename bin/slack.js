@@ -2,7 +2,7 @@
 
 import getApp from '../server/index.js';
 
-const port = 5005;
+const port = 5000;
 const address = '0.0.0.0';
 
 getApp({ port }).then((app) => {
